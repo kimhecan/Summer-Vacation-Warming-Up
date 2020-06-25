@@ -9,8 +9,6 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/)
 ```bash
 pip install django
 
-cd galary
-
 python manage.py runserver
 ```
 ![image](https://user-images.githubusercontent.com/39295881/85683943-a2f7ed80-b708-11ea-858a-a1e1b87d8607.png)
