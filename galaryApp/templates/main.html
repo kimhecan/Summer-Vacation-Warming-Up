@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../static/album.css">
+  <title>갤러리</title>
+</head>
+
+<body>
+  <main role="main" class="main">
+    <section id="change" class="jumbotron text-center">
+      <div class="container">
+        <h1>Album</h1>
+        <p class="lead text-muted">Like Lion 8th</p>
+        <p>
+          <a href="{% url 'createPage' %}" class="btn btn-primary my-2">ADD POST</a>
+          <button href="" class="btn btn-secondary my-2" onclick="changeTheme()">SWITCH THEME</button>
+        </p>
+      </div>
+    </section>
+    {% if messages %}
+    {% for message in messages %}
+    <div id="popup" class="alert alert-warning alert-dismissible show" role="alert"
+      style="z-index: 1;text-align: center; width: 500px; position: absolute; top:30%; left:50%; margin-left: -250px;">
+      <strong>{{ message.message }}</strong> Successfully
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+
+
+    <div id="change2" class="album py-5 bg-light">
+      <div class="container">
+        <div class="row">
+          {% for image in images.all %}
+          <div class=" col-md-4">
+            <div class="card mb-4 shadow-sm">
+              <img src="../media/{{image.src}}" width=" 100%" height="225" background="#55595c" color="#eceeef"
+                class="card-img-top" title="{{image.description}}" />
+              <div class="card-body">
+                <p class="card-text">{{image.title}}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">
+                      <a href="{% url 'updatePage' image.id %}">Edit</a></button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">
+                      <a href="{% url 'deleteFuction' image.id %}">Delete</a></button>
+                  </div>
+                  <small class="text-muted">{{image.date}}</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="../static/album.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
